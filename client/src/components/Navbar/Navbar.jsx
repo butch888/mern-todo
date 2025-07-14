@@ -1,12 +1,21 @@
+import { useContext } from 'react';
 import './Navbar.scss';
+import { AuthContext } from '../../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
+  
+  const { logout, isLogin } = useContext(AuthContext)
+
   return (
     <nav className='z-depth-4'>
     <div className="nav-wrapper navbar blue">
-      <a href="/" className="brand-logo">MERN Todo App</a>
+      <Link to="/" className="brand-logo">MERN Todo App</Link>
       <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a href="/login">Войти</a></li>
+        {isLogin ? 
+         <li onClick={logout}><Link to="/">Выйти</Link></li> : 
+         <li><Link to="/login">Войти</Link></li>
+        }
       </ul>
     </div>
   </nav>
